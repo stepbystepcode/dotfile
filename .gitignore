@@ -1,0 +1,75 @@
+# =========================
+# System & General (系统垃圾)
+# =========================
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+*.log
+*.tmp
+*.bak
+*.swp
+
+# =========================
+# Stow Specific (Stow 自身配置)
+# =========================
+# 如果你不想把忽略规则同步上去，可以取消注释
+# .stow-local-ignore
+
+# =========================
+# Opencode (重灾区 1)
+# =========================
+# Opencode 基于 Web 技术，node_modules 是万恶之源
+**/opencode/node_modules/
+**/opencode/dist/
+# bun.lock / package-lock.json 看你心情，如果是自动生成的配置通常不需要版本控制
+**/opencode/bun.lock
+**/opencode/yarn.lock
+**/opencode/package-lock.json
+
+# =========================
+# Raycast (重灾区 2)
+# =========================
+# Raycast 的 extensions 包含大量图标、编译后的脚本和 node_modules
+# 建议只同步 Raycast 的配置 (通过 Raycast Pro 账号或 export 导出配置)
+# 而不是同步这个庞大的 extensions 文件夹
+**/raycast/extensions/
+
+# 敏感信息：AI 提供商的 Key 可能会存在这里
+**/raycast/ai/providers.yaml
+
+# =========================
+# Tmux (插件目录)
+# =========================
+# 就像 npm install 一样，Tmux 插件应该通过 TPM 重新安装 (Prefix + I)
+# 不需要把整个 GitHub 仓库代码都存下来
+**/tmux/plugins/
+
+# 但是！保留 TPM 管理器本身(可选)，或者甚至连它也不要，只留一行配置
+# 这里建议全部忽略，在新电脑 `git clone` tpm 仓库即可
+# !**/tmux/plugins/tpm  <-- 如果你想保留 tpm 基础代码可以解开
+
+# =========================
+# Neovim (缓存与状态)
+# =========================
+# lazy-lock.json 建议保留！它是你插件版本的快照，保证多端体验一致
+# !**/nvim/lazy-lock.json
+
+# 忽略可能生成的会话、撤销历史等（通常在 .local/state 但以防万一）
+**/nvim/undo/
+**/nvim/swap/
+**/nvim/backup/
+**/nvim/spell/
+
+# =========================
+# Yazi (文件管理器)
+# =========================
+# 保留你自己写的 plugins (如 drag-copy.yazi)
+# 但如果有 .git 文件夹在插件里（比如你 clone 下来的），忽略它
+**/yazi/plugins/**/.git/
+
+# =========================
+# UV / Python
+# =========================
+# 收据文件通常没用
+**/uv/uv-receipt.json

@@ -1,0 +1,14 @@
+[[mgr.prepend_keymap]]
+on   = [ "<C-y>" ]
+run  = "plugin drag-copy"
+desc = "Drag and copy file"
+
+[[mgr.prepend_keymap]]
+on   = [ "<C-x>" ]
+run  = "plugin drag-copy -- move" 
+desc = "Drag and move file"
+
+[[mgr.prepend_keymap]]
+on   = [ "<C-o>" ]
+run  = '''shell -- open -R %s'''
+desc = "Drag selected files OUT to other apps"
