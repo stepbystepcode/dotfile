@@ -104,7 +104,7 @@ action_adopt() {
 }
 
 # ==========================================
-# 2. 安全审计 & 提交 (Commit) - [智能剔除版]
+# 2. 安全审计 & 提交 (Commit) - [智能剔除 + 极简Commit版]
 # ==========================================
 action_sync() {
   cd "$DOTFILES" || exit
@@ -168,24 +168,14 @@ action_sync() {
     log_info "Gitleaks not found, skipping security scan."
   fi
 
-  # 3. 剩下的流程不变
-  TYPE=$(gum choose "feat" "fix" "chore" "docs" "style" "refactor")
-  SCOPE=$(gum input --placeholder "scope (e.g. nvim, tmux)")
-  MSG=$(gum input --placeholder "What changed?")
+  # 3. 极简 Commit 逻辑
+  # 默认使用 update 消息，不再每次弹窗询问，除非你想手写
+  DEFAULT_MSG="update: dotfiles"
 
-  if [ -z "$MSG" ]; then
-    log_error "Commit message empty. Aborted."
-    return
-  fi
+  # 这里为了方便，直接用默认消息，如果你想还是可选，可以保留 gum choose
+  # 但你说 "不用分这么细"，所以直接硬编码了
 
-  if [ -z "$SCOPE" ]; then
-    FULL_MSG="$TYPE: $MSG"
-  else
-    FULL_MSG="$TYPE($SCOPE): $MSG"
-  fi
-
-  # 4. 提交 & 推送
-  if git commit -m "$FULL_MSG"; then
+  if git commit -m "$DEFAULT_MSG"; then
     gum spin --spinner globe --title "Pushing to remote..." -- git push
     log_success "Synced successfully! 🚀"
   else
