@@ -88,7 +88,7 @@ action_adopt() {
       # 3. 发射 Stow 链接
       cd "$DOTFILES" || exit
       # Stow 需要在该应用包的根目录下执行
-      if stow "$app"; then
+      if stow -t "$HOME" -v "$app"; then
         log_success "Adopted: $app"
       else
         log_error "Stow failed for $app. Check manualy."
